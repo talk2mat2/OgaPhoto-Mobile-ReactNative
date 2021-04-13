@@ -1,12 +1,17 @@
 /**
  * @format
  */
+import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {AppRegistry, Alert} from 'react-native';
 import MainApp from './App';
 import {name as appName} from './app.json';
 import OneSignal from 'react-native-onesignal';
 import {Provider as PaperProvider} from 'react-native-paper';
+import {NavigationContainer} from '@react-navigation/native';
+import {Provider} from 'react-redux';
+import {store, persistor} from './redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +21,7 @@ class App extends Component {
   async componentDidMount() {
     /* O N E S I G N A L   S E T U P */
     OneSignal.setAppId('6419071e-2c4d-43b0-906c-3704961722e1');
-    OneSignal.setExternalUserId('123456789');
+
     OneSignal.setLogLevel(6, 0);
     OneSignal.setRequiresUserPrivacyConsent(false);
     OneSignal.promptForPushNotificationsWithUserResponse(response => {
@@ -76,9 +81,15 @@ class App extends Component {
   }
   render() {
     return (
-      <PaperProvider>
-        <MainApp />
-      </PaperProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer>
+            <PaperProvider>
+              <MainApp />
+            </PaperProvider>
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
     );
   }
 }

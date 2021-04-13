@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {TextInput} from 'react-native-paper';
 import {Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {REACT_APP_API_URL} from '../EnvKeys';
 import axios from 'axios';
 import {
   View,
@@ -24,14 +25,13 @@ const ClentModal = props => {
   const [confpass, setConfPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState('');
-  const proxyUrl = 'https://mighty-hamlet-65743.herokuapp.com';
 
   // process.env.REACT_APP_API_URL
   const handleSignup = values => {
     setLoading(true);
 
     axios
-      .post(`${proxyUrl}/users/Register`, values)
+      .post(`${REACT_APP_API_URL}/users/Register`, values)
       .then(res => {
         setLoading(false);
         console.log(res.data);

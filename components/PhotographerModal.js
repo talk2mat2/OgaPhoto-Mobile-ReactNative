@@ -131,7 +131,7 @@ const PhotographerModal = props => {
             setFname(text);
           }}
           underlineColor="grey"
-          theme={{colors: {text: 'grey', placeholder: '#grey'}}}
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
         />
 
         <TextInput
@@ -142,7 +142,7 @@ const PhotographerModal = props => {
             setLname(text);
           }}
           underlineColor="grey"
-          theme={{colors: {text: 'grey', placeholder: '#grey'}}}
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
         />
 
         <TextInput
@@ -153,7 +153,7 @@ const PhotographerModal = props => {
             setMobile(text);
           }}
           underlineColor="grey"
-          theme={{colors: {text: 'grey', placeholder: '#grey'}}}
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
         />
 
         <TextInput
@@ -164,7 +164,7 @@ const PhotographerModal = props => {
             setEmail(text);
           }}
           underlineColor="grey"
-          theme={{colors: {text: 'grey', placeholder: '#grey'}}}
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
         />
 
         <TextInput
@@ -175,7 +175,7 @@ const PhotographerModal = props => {
             setPassword(text);
           }}
           underlineColor="grey"
-          theme={{colors: {text: 'grey', placeholder: '#grey'}}}
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
         />
 
         <TextInput
@@ -186,7 +186,7 @@ const PhotographerModal = props => {
             setConfPassword(text);
           }}
           underlineColor="grey"
-          theme={{colors: {text: 'grey', placeholder: '#grey'}}}
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
         />
       </Pressable>
       <Button onPress={handleSubmit} style={styles.Mybutton}>

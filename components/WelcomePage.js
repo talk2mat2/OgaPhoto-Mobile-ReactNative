@@ -17,78 +17,14 @@ import {
 } from 'react-native';
 import ClentModal from './ClientModal';
 import PhotographerModal from './PhotographerModal';
+import {REACT_APP_API_URL} from '../EnvKeys';
+import Client from './ClientLogin';
+import Photograpger from './PhotographerLogin';
 
 const WelcomePage = () => {
   const [ClientScreen, setClientScreen] = useState(true);
   const [RegisterVisible, setRegisterVisible] = useState(false);
   const [RegisterPhotoVisible, setRegisterPhotoVisible] = useState(false);
-  const Client = () => (
-    <View style={styles.AuthContainer}>
-      <Text style={styles.HeadText2}>Client Log in</Text>
-      <TextInput
-        style={styles.Input}
-        label="Email"
-        value=""
-        onChangeText={() => {}}
-      />
-      <TextInput
-        style={styles.Input}
-        label="Password"
-        value=""
-        onChangeText={() => {}}
-      />
-      <Button
-        style={styles.Mybutton}
-        mode="contained"
-        onPress={() => console.log('Pressedclient')}>
-        LOGIN
-      </Button>
-      <View style={styles.footDiv}>
-        <Text onPress={handleSwitch} style={styles.BottomText1}>
-          I am a Photographer ?
-        </Text>
-        <Text
-          onPress={() => setRegisterVisible(true)}
-          style={styles.BottomText1}>
-          Register
-        </Text>
-      </View>
-    </View>
-  );
-
-  const Photograpger = () => (
-    <View style={styles.AuthContainer}>
-      <Text style={styles.HeadText2}>PhotoGrapher Log in</Text>
-      <TextInput
-        style={styles.Input}
-        label="Email"
-        value=""
-        onChangeText={() => {}}
-      />
-      <TextInput
-        style={styles.Input}
-        label="Password"
-        value=""
-        onChangeText={() => {}}
-      />
-      <Button
-        style={styles.Mybutton}
-        mode="contained"
-        onPress={() => console.log('Pressedclient')}>
-        LOGIN
-      </Button>
-      <View style={styles.footDiv}>
-        <Text onPress={handleSwitch} style={styles.BottomText1}>
-          I am a Client ?
-        </Text>
-        <Text
-          onPress={() => setRegisterPhotoVisible(true)}
-          style={styles.BottomText1}>
-          Register
-        </Text>
-      </View>
-    </View>
-  );
 
   const handleSwitch = () => {
     setClientScreen(!ClientScreen);
@@ -101,7 +37,17 @@ const WelcomePage = () => {
           <Text style={styles.HeadText}>OGAPHOTO</Text>
           <Text style={styles.HeadTextFoot}>event, photography, Videos</Text>
         </View>
-        {ClientScreen ? <Photograpger /> : <Client />}
+        {ClientScreen ? (
+          <Photograpger
+            handleSwitch={handleSwitch}
+            setRegisterVisible={setRegisterPhotoVisible}
+          />
+        ) : (
+          <Client
+            handleSwitch={handleSwitch}
+            setRegisterVisible={setRegisterVisible}
+          />
+        )}
 
         <Modal
           visible={RegisterVisible}
