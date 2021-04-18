@@ -37,7 +37,7 @@ const WelcomePage = () => {
           <Text style={styles.HeadText}>OGAPHOTO</Text>
           <Text style={styles.HeadTextFoot}>event, photography, Videos</Text>
         </View>
-        {ClientScreen ? (
+        {!ClientScreen ? (
           <Photograpger
             handleSwitch={handleSwitch}
             setRegisterVisible={setRegisterPhotoVisible}

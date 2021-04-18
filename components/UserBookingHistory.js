@@ -16,7 +16,7 @@ import {REACT_APP_API_URL} from '../EnvKeys';
 import axios from 'axios';
 import Icon5 from 'react-native-vector-icons/AntDesign';
 import {GETMYBOOKINGSUCCESS} from '../redux/action';
-import Detailevents from './EventDetails';
+import Detailevents from './UserEventDetails';
 
 const BookingCards = props => {
   const {item, token, HandleAcceptOffer} = props;
@@ -38,15 +38,9 @@ const BookingCards = props => {
           width: '100%',
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-around',
+          justifyContent: 'flex-end',
         }}>
         <Button
-          onPress={HandleAcceptOffer.bind(this, item._id)}
-          disabled={item.accepted}>
-          {item.accepted ? 'accepted' : 'accept offer'}
-        </Button>
-        <Button
-          disabled={!item.accepted}
           // onClick={() =>
           // 	history.push({
           // 		pathname: `${match.url}/events`,
@@ -77,7 +71,7 @@ const BookingCards = props => {
   );
 };
 
-function SessionHistory({navigation}) {
+function UserBookingHistoryHistory({navigation}) {
   const bookings = useSelector(state => state.bookings);
 
   const dispatch = useDispatch();
@@ -215,4 +209,4 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
 });
-export default SessionHistory;
+export default UserBookingHistoryHistory;

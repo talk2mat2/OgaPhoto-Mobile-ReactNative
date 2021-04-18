@@ -14,6 +14,14 @@ function ProfileSettings({navigation}) {
   const userData = CurrentUser && CurrentUser.userData;
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={styles.UserContainer}>
+        <Icon size={80} name="account-circle-outline" color="grey" />
+        <Text style={styles.HeadText2}>
+          {userData.fname} {userData.lname}
+        </Text>
+        <Text>{userData.mobile}</Text>
+        <Text>{userData.Email}</Text>
+      </View>
       <Pressable
         onPress={handleOpenDrawer}
         style={{
@@ -31,14 +39,6 @@ function ProfileSettings({navigation}) {
           }}
         />
       </Pressable>
-      <View style={styles.UserContainer}>
-        <Icon size={80} name="account-circle-outline" color="grey" />
-        <Text style={styles.HeadText2}>
-          {userData.fname} {userData.lname}
-        </Text>
-        <Text>{userData.mobile}</Text>
-        <Text>{userData.Email}</Text>
-      </View>
     </View>
   );
 }
