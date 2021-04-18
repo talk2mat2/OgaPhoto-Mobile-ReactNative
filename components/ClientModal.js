@@ -5,17 +5,22 @@ import {TextInput} from 'react-native-paper';
 import {Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {REACT_APP_API_URL} from '../EnvKeys';
+import {LOGINSUCCESS} from '../redux/action';
 import axios from 'axios';
 import {
   View,
   Text,
   ImageBackground,
+  KeyboardAvoidingView,
   StyleSheet,
+  Platform,
   Dimensions,
   Pressable,
+  ScrollView,
   Modal,
   Alert,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 const ClentModal = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +30,7 @@ const ClentModal = props => {
   const [confpass, setConfPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState('');
-
+  const dispatch = useDispatch();
   // process.env.REACT_APP_API_URL
   const handleSignup = values => {
     setLoading(true);
@@ -36,7 +41,7 @@ const ClentModal = props => {
         setLoading(false);
         console.log(res.data);
         // history.push("/dashboard");
-        // dispatch(LOGINSUCCESS(res.data));
+        dispatch(LOGINSUCCESS(res.data));
       })
       .catch(err => {
         setLoading(false);
@@ -76,86 +81,94 @@ const ClentModal = props => {
     setErrorMessage('');
   };
   return (
-    <View style={styles.ClientModal}>
-      <Pressable onPress={() => props.setRegisterVisible(false)}>
-        <Icon name="arrowleft" size={40} style={{padding: 10}} />
-        <Text style={{...styles.HeadText2, color: 'white'}}>I am a client</Text>
-        <Text style={styles.HeadText3}>and I want to order a shoot</Text>
-        <TextInput
-          style={styles.ClientModalInput}
-          label="First Name"
-          //   autoComplete="off"
-          //   onChange={handleFnameChange}
-          //   value={fname}
-          //   type="text"
-          //   required
-          value={fname}
-          onChangeText={text => {
-            setFname(text);
-          }}
-          underlineColor="#ffff"
-          theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
-        />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{...styles.ClientModal}}>
+      <ScrollView style={{flex: 1}}>
+        {/* <View style={styles.ClientModal}> */}
+        <Pressable onPress={() => props.setRegisterVisible(false)}>
+          <Icon name="arrowleft" size={40} style={{padding: 10}} />
+          <Text style={{...styles.HeadText2, color: 'white'}}>
+            I am a client
+          </Text>
+          <Text style={styles.HeadText3}>and I want to order a shoot</Text>
+          <TextInput
+            style={styles.ClientModalInput}
+            label="First Name"
+            //   autoComplete="off"
+            //   onChange={handleFnameChange}
+            //   value={fname}
+            //   type="text"
+            //   required
+            value={fname}
+            onChangeText={text => {
+              setFname(text);
+            }}
+            underlineColor="#ffff"
+            theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
+          />
 
-        <TextInput
-          style={styles.ClientModalInput}
-          label="Last Name"
-          value={lname}
-          onChangeText={text => {
-            setLname(text);
-          }}
-          underlineColor="#ffff"
-          theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
-        />
+          <TextInput
+            style={styles.ClientModalInput}
+            label="Last Name"
+            value={lname}
+            onChangeText={text => {
+              setLname(text);
+            }}
+            underlineColor="#ffff"
+            theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
+          />
 
-        <TextInput
-          style={styles.ClientModalInput}
-          label="Phone Number"
-          value={mobile}
-          onChangeText={text => {
-            setMobile(text);
-          }}
-          underlineColor="#ffff"
-          theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
-        />
+          <TextInput
+            style={styles.ClientModalInput}
+            label="Phone Number"
+            value={mobile}
+            onChangeText={text => {
+              setMobile(text);
+            }}
+            underlineColor="#ffff"
+            theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
+          />
 
-        <TextInput
-          style={styles.ClientModalInput}
-          label="Email"
-          value={email}
-          onChangeText={text => {
-            setEmail(text);
-          }}
-          underlineColor="#ffff"
-          theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
-        />
+          <TextInput
+            style={styles.ClientModalInput}
+            label="Email"
+            value={email}
+            onChangeText={text => {
+              setEmail(text);
+            }}
+            underlineColor="#ffff"
+            theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
+          />
 
-        <TextInput
-          style={styles.ClientModalInput}
-          label="Password"
-          value={password}
-          onChangeText={text => {
-            setPassword(text);
-          }}
-          underlineColor="#ffff"
-          theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
-        />
+          <TextInput
+            style={styles.ClientModalInput}
+            label="Password"
+            value={password}
+            onChangeText={text => {
+              setPassword(text);
+            }}
+            underlineColor="#ffff"
+            theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
+          />
 
-        <TextInput
-          style={styles.ClientModalInput}
-          label="Confirm Password"
-          value={confpass}
-          onChangeText={text => {
-            setConfPassword(text);
-          }}
-          underlineColor="#ffff"
-          theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
-        />
-      </Pressable>
-      <Button onPress={handleSubmit} style={styles.Mybutton2}>
-        {loading ? 'loading' : ' SIGNUP'}
-      </Button>
-    </View>
+          <TextInput
+            style={styles.ClientModalInput}
+            label="Confirm Password"
+            value={confpass}
+            onChangeText={text => {
+              setConfPassword(text);
+            }}
+            underlineColor="#ffff"
+            theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
+          />
+        </Pressable>
+        <Button onPress={handleSubmit} style={styles.Mybutton2}>
+          {loading ? 'loading' : ' SIGNUP'}
+        </Button>
+        {/* </View> */}
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -172,6 +185,7 @@ const styles = StyleSheet.create({
   ClientModal: {
     backgroundColor: 'rgb(71, 178, 228)',
     flex: 1,
+    // justifyContent: 'flex-end',
   },
   ClientModalInput: {
     backgroundColor: 'rgb(71, 178, 228)',

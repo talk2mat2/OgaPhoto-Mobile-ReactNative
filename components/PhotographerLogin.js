@@ -16,6 +16,7 @@ import {
   Dimensions,
   ActivityIndicator,
   Alert,
+  Animated,
 } from 'react-native';
 
 const Photograpger = props => {
@@ -24,6 +25,10 @@ const Photograpger = props => {
   const [password, setpassword] = useState('');
   const {handleSwitch, setRegisterPhotoVisible} = props;
   const [loading, setLoading] = useState(false);
+  const Intro = new Animated.ValueXY({
+    x: 0,
+    y: Dimensions.get('window').height,
+  });
   const handleLogin = values => {
     setLoading(true);
     axios
@@ -61,8 +66,25 @@ const Photograpger = props => {
     // dispatch(signIn(email, password));
     console.log(email, password);
   };
+
+  const BoxAnim = () => {
+    Animated.spring(Intro, {
+      toValue: {x: 0, y: 0},
+      bounciness: 10,
+      speed: 7,
+      useNativeDriver: true,
+      duration: 1000,
+    }).start();
+  };
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      BoxAnim();
+    }, 1000);
+  }, []);
   return (
-    <View style={styles.AuthContainer}>
+    <Animated.View
+      style={{...styles.AuthContainer, transform: [{translateY: Intro.y}]}}>
       <Text style={styles.HeadText2}>PhotoGrapher Log in</Text>
       <TextInput
         style={styles.Input}
@@ -100,7 +122,7 @@ const Photograpger = props => {
           Register
         </Text>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

@@ -9,11 +9,13 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {
   View,
   Text,
+  Animated,
   ImageBackground,
   StyleSheet,
   Dimensions,
   Pressable,
   Modal,
+  KeyboardAvoidingView,
 } from 'react-native';
 import ClentModal from './ClientModal';
 import PhotographerModal from './PhotographerModal';
@@ -40,7 +42,7 @@ const WelcomePage = () => {
         {!ClientScreen ? (
           <Photograpger
             handleSwitch={handleSwitch}
-            setRegisterVisible={setRegisterPhotoVisible}
+            setRegisterPhotoVisible={setRegisterPhotoVisible}
           />
         ) : (
           <Client

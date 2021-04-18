@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {TextInput} from 'react-native-paper';
 import {Button} from 'react-native-paper';
@@ -13,6 +13,7 @@ import {
   View,
   Text,
   StyleSheet,
+  Animated,
   Dimensions,
   ActivityIndicator,
   Alert,
@@ -24,6 +25,10 @@ const Client = props => {
   const [password, setpassword] = useState('');
   const {handleSwitch, setRegisterVisible} = props;
   const [loading, setLoading] = useState(false);
+  const Intro = new Animated.ValueXY({
+    x: 0,
+    y: Dimensions.get('window').height,
+  });
   const handleLogin = values => {
     setLoading(true);
     axios
@@ -61,8 +66,25 @@ const Client = props => {
     // dispatch(signIn(email, password));
     console.log(email, password);
   };
+
+  const BoxAnim = () => {
+    Animated.spring(Intro, {
+      toValue: {x: 0, y: 0},
+      bounciness: 10,
+      speed: 7,
+      useNativeDriver: true,
+      duration: 1000,
+    }).start();
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      BoxAnim();
+    }, 1000);
+  }, []);
   return (
-    <View style={styles.AuthContainer}>
+    <Animated.View
+      style={{...styles.AuthContainer, transform: [{translateY: Intro.y}]}}>
       <Text style={styles.HeadText2}>Client Log in</Text>
       <TextInput
         style={styles.Input}
@@ -100,7 +122,7 @@ const Client = props => {
           Register
         </Text>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
