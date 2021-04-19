@@ -84,7 +84,7 @@ function UserBookingHistoryHistory({navigation}) {
   const FecthMyBookings = async () => {
     await axios
       .get(
-        `${REACT_APP_API_URL}/photographer/FectMyBookings`,
+        `${REACT_APP_API_URL}/users/getSesssionHistory`,
 
         {
           headers: {authorization: token},
@@ -158,6 +158,14 @@ function UserBookingHistoryHistory({navigation}) {
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <View style={styles.Container}>
         <Text style={styles.HeadText2}>Session History</Text>
+        <View
+          style={{
+            width: 100 + '%',
+            height: 1,
+            backgroundColor: 'dodgerblue',
+            marginBottom: 10,
+          }}
+        />
         <ScrollView>{MapBookings()}</ScrollView>
       </View>
 

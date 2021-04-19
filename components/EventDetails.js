@@ -10,6 +10,7 @@ import {
   Pressable,
 } from 'react-native';
 import Icon4 from 'react-native-vector-icons/Entypo';
+import Icon6 from 'react-native-vector-icons/FontAwesome5';
 import {useSelector, useDispatch} from 'react-redux';
 import {Button} from 'react-native-paper';
 import {REACT_APP_API_URL} from '../EnvKeys';
@@ -96,15 +97,40 @@ const Detailevents = ({data}) => {
           <View style={styles.Margin} />
           <View>
             <Text style={styles.MidText}>
-              {BookingDetail.bookedById.fname} {BookingDetail.bookedById.lname}
+              <Icon5
+                name="profile"
+                size={20}
+                style={{
+                  color: 'dodgerblue',
+                  paddingRight: 20,
+                }}
+              />
+              {'  '} {BookingDetail.bookedById.fname}{' '}
+              {BookingDetail.bookedById.lname}
             </Text>
 
             <Text style={styles.MidText}>
-              location: {BookingDetail.address}
+              <Icon4
+                name="location-pin"
+                size={20}
+                style={{
+                  color: 'dodgerblue',
+                  paddingRight: 20,
+                }}
+              />
+              {'  '} location: {BookingDetail.address}
             </Text>
 
             <Text style={styles.MidText}>
-              price per min: NGN {BookingDetail.pricePerMinutes}
+              <Icon6
+                name="money-check-alt"
+                size={20}
+                style={{
+                  color: 'dodgerblue',
+                  paddingRight: 20,
+                }}
+              />
+              {'  '} price per min: NGN {BookingDetail.pricePerMinutes}
             </Text>
           </View>
         </View>
@@ -114,8 +140,10 @@ const Detailevents = ({data}) => {
         <Button
           style={{
             ...styles.Mybutton2,
-            backgroundColor:
-              BookingDetail && BookingDetail.timeStart ? '#fff' : null,
+            borderColor:
+              BookingDetail && BookingDetail.timeStart
+                ? '#fff'
+                : 'rgb(71, 178, 228)',
           }}
           disabled={BookingDetail && BookingDetail.timeStart}
           onPress={StartSession.bind(this, BookingDetail._id)}>
@@ -126,7 +154,7 @@ const Detailevents = ({data}) => {
             disabled={BookingDetail.timeEnd}
             style={{
               ...styles.Mybutton2,
-              backgroundColor: BookingDetail.timeEnd ? '#fff' : null,
+              borderColor: BookingDetail.timeEnd ? '#fff' : 'rgb(71, 178, 228)',
             }}
             onPress={EndSession.bind(this, BookingDetail._id)}>
             <Text> {BookingDetail.timeEnd ? 'Ended' : 'End Session'}</Text>
@@ -172,7 +200,7 @@ const styles = StyleSheet.create({
     width: 100 + '%',
     padding: 10,
   },
-  Container: {paddingTop: 20, padding: 10},
+  Container: {paddingTop: 20, padding: 10, backgroundColor: '#ffffff'},
   MidText: {
     color: 'grey',
     fontSize: 18,
@@ -188,7 +216,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   Mybutton2: {
-    backgroundColor: 'rgb(71, 178, 228)',
+    // backgroundColor: 'rgb(71, 178, 228)',
+    borderWidth: 1,
+    borderStyle: 'solid',
     minWidth: 150,
     alignSelf: 'center',
     borderRadius: 20,

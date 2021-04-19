@@ -20,6 +20,16 @@ const MessageCard = ({item}) => {
           padding: 2,
         }}>
         <Text style={styles.Midtext2UnderLine}>
+          {' '}
+          <Icon5
+            name="mail"
+            size={25}
+            style={{
+              color: 'dodgerblue',
+              paddingRight: 20,
+            }}
+          />
+          {'  '}
           {item.title.slice(0, 29)} from -
           {item.sender.fname && item.sender.fname}
         </Text>
@@ -96,11 +106,31 @@ function SupportMessage({navigation}) {
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <View style={styles.Container}>
         <Text style={styles.HeadText2}>Support Messages</Text>
+        <View
+          style={{
+            width: 100 + '%',
+            height: 1,
+            backgroundColor: 'dodgerblue',
+            marginBottom: 10,
+          }}
+        />
         <View>
           {MessageState.length > 0 ? (
             mapMessages()
           ) : (
-            <Text>No new messages availaible</Text>
+            <Text style={{textAlign: 'center', marginTop: 100}}>
+              {' '}
+              <Icon5
+                name="warning"
+                size={25}
+                style={{
+                  color: 'dodgerblue',
+                  paddingRight: 20,
+                }}
+              />
+              {'  '}
+              No new messages availaible
+            </Text>
           )}
         </View>
       </View>

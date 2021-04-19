@@ -10,6 +10,7 @@ import axios from 'axios';
 import {
   View,
   Text,
+  ActivityIndicator,
   ImageBackground,
   KeyboardAvoidingView,
   StyleSheet,
@@ -145,6 +146,7 @@ const ClentModal = props => {
             style={styles.ClientModalInput}
             label="Password"
             value={password}
+            secureTextEntry={true}
             onChangeText={text => {
               setPassword(text);
             }}
@@ -156,6 +158,7 @@ const ClentModal = props => {
             style={styles.ClientModalInput}
             label="Confirm Password"
             value={confpass}
+            secureTextEntry={true}
             onChangeText={text => {
               setConfPassword(text);
             }}
@@ -163,6 +166,16 @@ const ClentModal = props => {
             theme={{colors: {text: '#ffff', placeholder: '#ffff'}}}
           />
         </Pressable>
+        {loading ? (
+          <View style={styles.loading}>
+            <ActivityIndicator
+              style={{alignSelf: 'center'}}
+              size="large"
+              color="dodgerblue"
+            />
+            <Text style={styles.MidText}>loading...</Text>
+          </View>
+        ) : null}
         <Button onPress={handleSubmit} style={styles.Mybutton2}>
           {loading ? 'loading' : ' SIGNUP'}
         </Button>
@@ -263,6 +276,26 @@ const styles = StyleSheet.create({
   footDiv: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  loading: {
+    position: 'absolute',
+    minHeight: 50,
+    width: 100,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: 100,
+    padding: 10,
+    zIndex: 3,
+    elevation: 3,
+    textAlign: 'center',
+    alignSelf: 'center',
+    backgroundColor: '#ffffff',
+  },
+  MidText: {
+    color: 'grey',
+    fontSize: 18,
+    textAlign: 'center',
+    fontWeight: '400',
   },
 });
 

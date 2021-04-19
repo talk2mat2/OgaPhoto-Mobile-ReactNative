@@ -16,6 +16,15 @@ function Promos({navigation}) {
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <View style={styles.Container}>
         <Text style={styles.HeadText2}>Promos</Text>
+        <View
+          style={{
+            width: 100 + '%',
+            height: 1,
+            backgroundColor: 'dodgerblue',
+            marginBottom: 10,
+            marginTop: 4,
+          }}
+        />
         <View style={styles.Margin} />
         <View style={styles.Margin} />
         <Text style={styles.MidText}>No promos right now</Text>

@@ -12,6 +12,7 @@ import {
   Text,
   ImageBackground,
   KeyboardAvoidingView,
+  ActivityIndicator,
   StyleSheet,
   Dimensions,
   Pressable,
@@ -72,8 +73,7 @@ const PhotographerModal = props => {
         setLoading(false);
         if (err.response) {
           console.log(err.response.data.message);
-          err.response.data.message &&
-            setErrorMessage(err.response.data.message);
+          err.response.data.message && Alert.alert(err.response.data.message);
         }
         console.log(err);
         setErrorMessage(
@@ -124,79 +124,92 @@ const PhotographerModal = props => {
       <ScrollView style={{flex: 1}}>
         <Pressable onPress={() => props.setRegisterVisible(false)}>
           <Icon name="arrowleft" size={40} style={{padding: 10}} />
-          <Text style={{...styles.HeadText2}}>I am a photographer</Text>
-          <Text style={styles.HeadText3}>and I'm looking for assignments</Text>
-          <TextInput
-            style={styles.ClientModalInput}
-            label="First Name"
-            //   autoComplete="off"
-            //   onChange={handleFnameChange}
-            //   value={fname}
-            //   type="text"
-            //   required
-            value={fname}
-            onChangeText={text => {
-              setFname(text);
-            }}
-            underlineColor="grey"
-            theme={{colors: {text: 'grey', placeholder: 'grey'}}}
-          />
-
-          <TextInput
-            style={styles.ClientModalInput}
-            label="Last Name"
-            value={lname}
-            onChangeText={text => {
-              setLname(text);
-            }}
-            underlineColor="grey"
-            theme={{colors: {text: 'grey', placeholder: 'grey'}}}
-          />
-
-          <TextInput
-            style={styles.ClientModalInput}
-            label="Phone Number"
-            value={mobile}
-            onChangeText={text => {
-              setMobile(text);
-            }}
-            underlineColor="grey"
-            theme={{colors: {text: 'grey', placeholder: 'grey'}}}
-          />
-
-          <TextInput
-            style={styles.ClientModalInput}
-            label="Email"
-            value={email}
-            onChangeText={text => {
-              setEmail(text);
-            }}
-            underlineColor="grey"
-            theme={{colors: {text: 'grey', placeholder: 'grey'}}}
-          />
-
-          <TextInput
-            style={styles.ClientModalInput}
-            label="Password"
-            value={password}
-            onChangeText={text => {
-              setPassword(text);
-            }}
-            underlineColor="grey"
-            theme={{colors: {text: 'grey', placeholder: 'grey'}}}
-          />
-
-          <TextInput
-            style={styles.ClientModalInput}
-            label="Confirm Password"
-            value={confpass}
-            onChangeText={text => {
-              setConfPassword(text);
-            }}
-            underlineColor="grey"
-            theme={{colors: {text: 'grey', placeholder: 'grey'}}}
-          />
         </Pressable>
+        <Text style={{...styles.HeadText2}}>I am a photographer</Text>
+        <Text style={styles.HeadText3}>and I'm looking for assignments</Text>
+        <TextInput
+          style={styles.ClientModalInput}
+          label="First Name"
+          //   autoComplete="off"
+          //   onChange={handleFnameChange}
+          //   value={fname}
+          //   type="text"
+          //   required
+          value={fname}
+          onChangeText={text => {
+            setFname(text);
+          }}
+          underlineColor="grey"
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
+        />
+
+        <TextInput
+          style={styles.ClientModalInput}
+          label="Last Name"
+          value={lname}
+          onChangeText={text => {
+            setLname(text);
+          }}
+          underlineColor="grey"
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
+        />
+
+        <TextInput
+          style={styles.ClientModalInput}
+          label="Phone Number"
+          value={mobile}
+          onChangeText={text => {
+            setMobile(text);
+          }}
+          underlineColor="grey"
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
+        />
+
+        <TextInput
+          style={styles.ClientModalInput}
+          label="Email"
+          value={email}
+          onChangeText={text => {
+            setEmail(text);
+          }}
+          underlineColor="grey"
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
+        />
+
+        <TextInput
+          style={styles.ClientModalInput}
+          label="Password"
+          value={password}
+          secureTextEntry={true}
+          onChangeText={text => {
+            setPassword(text);
+          }}
+          underlineColor="grey"
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
+        />
+
+        <TextInput
+          style={styles.ClientModalInput}
+          label="Confirm Password"
+          value={confpass}
+          secureTextEntry={true}
+          onChangeText={text => {
+            setConfPassword(text);
+          }}
+          underlineColor="grey"
+          theme={{colors: {text: 'grey', placeholder: 'grey'}}}
+        />
+
+        {loading ? (
+          <View style={styles.loading}>
+            <ActivityIndicator
+              style={{alignSelf: 'center'}}
+              size="large"
+              color="dodgerblue"
+            />
+            <Text style={styles.MidText}>loading...</Text>
+          </View>
+        ) : null}
         <Button onPress={handleSubmit} style={styles.Mybutton}>
           <Text style={{color: '#ffffff'}}>
             {loading ? 'loading' : ' SIGNUP'}
@@ -299,6 +312,26 @@ const styles = StyleSheet.create({
   footDiv: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  loading: {
+    position: 'absolute',
+    minHeight: 50,
+    width: 100,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: 100,
+    padding: 10,
+    zIndex: 3,
+    elevation: 3,
+    textAlign: 'center',
+    alignSelf: 'center',
+    backgroundColor: '#ffffff',
+  },
+  MidText: {
+    color: 'grey',
+    fontSize: 18,
+    textAlign: 'center',
+    fontWeight: '400',
   },
 });
 

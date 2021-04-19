@@ -49,11 +49,10 @@ function Looking({navigation}) {
   };
   let mapRef = null;
   const CloserPhotoGrapher = photographer => {
-    const CloserPhotoGrapheritem =
-      photographer &&
-      photographer.reduce(function (prev, curr) {
-        return prev.distance < curr.distance ? prev : curr;
-      });
+    const CloserPhotoGrapheritem = photographer && photographer.length > 0;
+    photographer.reduce(function (prev, curr) {
+      return prev.distance < curr.distance ? prev : curr;
+    });
     return CloserPhotoGrapheritem;
   };
   const handleBooking = async _id => {

@@ -3,6 +3,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Icon4 from 'react-native-vector-icons/Entypo';
+import Icon5 from 'react-native-vector-icons/Entypo';
 import {useSelector} from 'react-redux';
 import {Button} from 'react-native-paper';
 
@@ -16,9 +17,27 @@ function Wallet({navigation}) {
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <View style={styles.Container}>
         <Text style={styles.HeadText2}>Wallet Page</Text>
+        <View
+          style={{
+            width: 100 + '%',
+            height: 1,
+            backgroundColor: 'dodgerblue',
+            marginBottom: 10,
+            marginTop: 4,
+          }}
+        />
         <View style={styles.Margin} />
         <View style={styles.Margin} />
-        <Text style={styles.MidText}>Credits- NGN {userData.wallet}</Text>
+        <Text style={styles.MidText}>
+          <Icon5
+            name="wallet"
+            size={30}
+            style={{
+              color: 'dodgerblue',
+            }}
+          />{' '}
+          Credits- NGN {userData.wallet}
+        </Text>
         <View style={styles.Margin} />
         <Button style={styles.Mybutton2}>
           <Text style={{color: '#ffffff'}}>Update Wallet</Text>

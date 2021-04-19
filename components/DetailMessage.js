@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
@@ -14,6 +15,19 @@ const DetailMessages = ({data}) => {
       {message ? (
         <>
           <Text style={styles.HeadText2}>{message.title}</Text>
+          <View
+            style={{
+              width: 100 + '%',
+              height: 1,
+              backgroundColor: 'dodgerblue',
+              marginBottom: 6,
+              marginTop: 1,
+            }}
+          />
+          <Text style={styles.MidText}>
+            From - {message.sender.fname && message.sender.fname}
+          </Text>
+          <View style={styles.Margin} />
           <Text style={styles.MidText}>{message.body}</Text>
         </>
       ) : null}
@@ -27,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 2,
   },
   Container: {
     flex: 1,
@@ -43,7 +57,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   Margin: {
-    marginVertical: 20,
+    marginVertical: 10,
   },
   Mybutton2: {
     backgroundColor: 'rgb(71, 178, 228)',

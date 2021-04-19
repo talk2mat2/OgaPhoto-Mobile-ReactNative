@@ -23,8 +23,11 @@ const BookingCards = props => {
   const [EventDetailsVisible, setEventDetailsVisible] = useState(false);
   return (
     <View
-    // style={{ cursor: 'pointer' }}
-    >
+      style={{
+        ...styles.boxWithShadow,
+        marginVertical: 2,
+        backgroundColor: '#ffffff',
+      }}>
       <Text>Booked by: {item.bookedById.fname}</Text>
 
       <Text>Date : {item.bookingDate.substring(0, 10)}</Text>
@@ -161,10 +164,42 @@ function SessionHistory({navigation}) {
   };
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f1f0f0',
+      }}>
       <View style={styles.Container}>
         <Text style={styles.HeadText2}>Session History</Text>
-        <ScrollView>{MapBookings()}</ScrollView>
+        <View
+          style={{
+            width: 100 + '%',
+            height: 1,
+            backgroundColor: 'dodgerblue',
+            marginBottom: 10,
+            marginTop: 4,
+          }}
+        />
+        <ScrollView>
+          {bookings && bookings.length ? (
+            MapBookings()
+          ) : (
+            <Text style={{textAlign: 'center', marginTop: 100}}>
+              <Icon5
+                name="warning"
+                size={25}
+                style={{
+                  color: 'dodgerblue',
+                  paddingRight: 20,
+                }}
+              />
+              {'  '}
+              empty
+            </Text>
+          )}
+        </ScrollView>
       </View>
 
       <Icon4
@@ -213,6 +248,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 2,
     color: '#ffffff',
+  },
+  boxWithShadow: {
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
 });
 export default SessionHistory;

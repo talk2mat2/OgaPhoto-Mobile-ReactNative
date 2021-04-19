@@ -103,13 +103,18 @@ const Client = props => {
           setpassword(text);
         }}
       />
-
+      {loading ? (
+        <View style={styles.loading}>
+          <ActivityIndicator
+            style={{alignSelf: 'center'}}
+            size="large"
+            color="dodgerblue"
+          />
+          <Text style={styles.MidText}>loading...</Text>
+        </View>
+      ) : null}
       <Button style={styles.Mybutton} mode="contained" onPress={handleSubmit}>
-        {loading ? (
-          <ActivityIndicator color="#ffffff" style={{height: 90 + '%'}} />
-        ) : (
-          'LOGIN'
-        )}
+        {'LOGIN'}
       </Button>
 
       <View style={styles.footDiv}>
@@ -216,6 +221,26 @@ const styles = StyleSheet.create({
   footDiv: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  loading: {
+    position: 'absolute',
+    minHeight: 50,
+    width: 100,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: 50,
+    padding: 10,
+    zIndex: 3,
+    elevation: 3,
+    textAlign: 'center',
+    alignSelf: 'center',
+    backgroundColor: '#ffffff',
+  },
+  MidText: {
+    color: 'grey',
+    fontSize: 18,
+    textAlign: 'center',
+    fontWeight: '400',
   },
 });
 
