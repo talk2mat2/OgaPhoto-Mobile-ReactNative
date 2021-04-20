@@ -112,6 +112,7 @@ function SupportMessage({navigation}) {
             height: 1,
             backgroundColor: 'dodgerblue',
             marginBottom: 10,
+            marginTop: 4,
           }}
         />
         <View>
@@ -157,7 +158,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
-    marginBottom: 20,
   },
   Container: {
     flex: 1,

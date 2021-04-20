@@ -37,7 +37,9 @@ const WelcomePage = () => {
       <ImageBackground source={Backgroundimg} style={styles.image}>
         <View style={styles.headerContainer}>
           <Text style={styles.HeadText}>OGAPHOTO</Text>
-          <Text style={styles.HeadTextFoot}>event, photography, Videos</Text>
+          <Text style={styles.HeadTextFoot}>
+            Amazing, Vetted Photographers at your Fingertips
+          </Text>
         </View>
         {!ClientScreen ? (
           <Photograpger
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
   },
 
   HeadTextFoot: {
-    fontSize: 14,
+    fontSize: 11,
     textAlign: 'center',
     color: '#fff',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',

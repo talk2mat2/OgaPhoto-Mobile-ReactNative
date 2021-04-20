@@ -34,17 +34,8 @@ function ProfileSettings({navigation}) {
           name="account-circle-outline"
           color="dodgerblue"
         />
-        <View style={{height: 30}} />
+        <View style={{height: 2}} />
         <Text style={{...styles.HeadText3}}>
-          <Icon
-            name="account"
-            size={25}
-            style={{
-              color: 'dodgerblue',
-              paddingRight: 20,
-            }}
-          />
-          {'  '}
           {userData.fname} {userData.lname}
         </Text>
         <View style={styles.Margin} />
@@ -59,17 +50,20 @@ function ProfileSettings({navigation}) {
             }}
           />
           {'  '}
+          {'  '}
           {userData.mobile}
         </Text>
+        <View style={{height: 20}} />
         <Text>
           <Icon5
             name="mail"
             size={25}
             style={{
               color: 'dodgerblue',
-              paddingRight: 20,
+              paddingRight: 30,
             }}
           />
+          {'  '}
           {'  '}
           {userData.Email}
         </Text>

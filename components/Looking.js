@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 import {REACT_APP_API_URL} from '../EnvKeys';
 import axios from 'axios';
 import {Button} from 'react-native-paper';
+import Geolocation from '@react-native-community/geolocation';
 import {
   Modal,
   View,
@@ -39,6 +40,7 @@ function Looking({navigation}) {
   const [Searching, setSearching] = useState(false);
   const [PhotoDetails, setPhotoDetails] = useState(false);
   const [PhotoInfo, setPhotoInfo] = useState(null);
+  const [mylocation, setMylocation] = useState(null);
   const CurrentUser = useSelector(state => state.user.currentUser);
   const token = CurrentUser && CurrentUser.token;
   const photographers = useSelector(state => state.photographers);
@@ -49,12 +51,36 @@ function Looking({navigation}) {
   };
   let mapRef = null;
   const CloserPhotoGrapher = photographer => {
-    const CloserPhotoGrapheritem = photographer && photographer.length > 0;
-    photographer.reduce(function (prev, curr) {
-      return prev.distance < curr.distance ? prev : curr;
-    });
+    const CloserPhotoGrapheritem =
+      photographer &&
+      photographer.length > 0 &&
+      photographer.reduce(function (prev, curr) {
+        return prev.distance < curr.distance ? prev : curr;
+      });
     return CloserPhotoGrapheritem;
   };
+  const option = {
+    enableHighAccuracy: true,
+    timeout: 10000,
+    maximumAge: 0,
+  };
+  useEffect(() => {
+    if (mylocation == null) {
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log(position.coords.latitude);
+          console.log(position.coords.longitude);
+          setMylocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        err => console.log(err),
+        option,
+      );
+    }
+  }, []);
+
   const handleBooking = async _id => {
     setsessionVenue({});
     setCardVisible(true);
@@ -250,10 +276,10 @@ function Looking({navigation}) {
             provider={PROVIDER_GOOGLE}
             style={{flex: 1}}
             region={
-              sessionVenue.lat
+              mylocation.lat
                 ? {
-                    latitude: sessionVenue.lat,
-                    longitude: sessionVenue.lng,
+                    latitude: mylocation.lat,
+                    longitude: mylocation.lng,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                   }

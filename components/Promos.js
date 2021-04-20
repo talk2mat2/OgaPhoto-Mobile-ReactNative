@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
   MidText: {
     color: 'grey',
     fontSize: 18,
-    textAlign: 'left',
-    fontWeight: '400',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   Margin: {
     marginVertical: 20,

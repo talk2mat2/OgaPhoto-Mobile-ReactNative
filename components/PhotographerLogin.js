@@ -68,12 +68,13 @@ const Photograpger = props => {
   };
 
   const BoxAnim = () => {
-    Animated.spring(Intro, {
+    Animated.timing(Intro, {
       toValue: {x: 0, y: 0},
-      bounciness: 10,
-      speed: 7,
+      bounciness: 3,
+      speed: 40,
+
       useNativeDriver: true,
-      duration: 1000,
+      duration: 2000,
     }).start();
   };
 
@@ -90,6 +91,7 @@ const Photograpger = props => {
         style={styles.Input}
         label="Email"
         value={email}
+        underlineColor="rgb(0, 162, 149)"
         onChangeText={text => {
           setemail(text);
         }}
@@ -97,6 +99,7 @@ const Photograpger = props => {
       <TextInput
         style={styles.Input}
         label="Password"
+        underlineColor="rgb(0, 162, 149)"
         secureTextEntry={true}
         value={password}
         onChangeText={text => {
@@ -157,9 +160,9 @@ const styles = StyleSheet.create({
   },
 
   Input: {backgroundColor: '#fff', width: 90 + '%', alignSelf: 'center'},
-  BottomText1: {color: 'rgb(71, 178, 228)', fontSize: 15, fontWeight: 'bold'},
+  BottomText1: {color: 'rgb(0, 162, 149)', fontSize: 15, fontWeight: 'bold'},
   Mybutton: {
-    backgroundColor: 'rgb(71, 178, 228)',
+    backgroundColor: 'rgb(0, 162, 149)',
     width: 150,
     alignSelf: 'center',
     borderRadius: 20,

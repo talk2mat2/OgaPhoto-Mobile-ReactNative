@@ -164,6 +164,7 @@ function UserBookingHistoryHistory({navigation}) {
             height: 1,
             backgroundColor: 'dodgerblue',
             marginBottom: 10,
+            marginTop: 4,
           }}
         />
         <ScrollView>{MapBookings()}</ScrollView>

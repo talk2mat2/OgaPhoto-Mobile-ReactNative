@@ -27,7 +27,7 @@ function Wallet({navigation}) {
           }}
         />
         <View style={styles.Margin} />
-        <View style={styles.Margin} />
+
         <Text style={styles.MidText}>
           <Icon5
             name="wallet"
@@ -39,6 +39,7 @@ function Wallet({navigation}) {
           Credits- NGN {userData.wallet}
         </Text>
         <View style={styles.Margin} />
+
         <Button style={styles.Mybutton2}>
           <Text style={{color: '#ffffff'}}>Update Wallet</Text>
         </Button>

@@ -33,8 +33,14 @@ function HomeScreen({navigation}) {
     }
   }, []);
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <View
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ffffff',
+      }}>
+      {/* <View
         style={{width: 100 + '%', height: 100 + '%', backgroundColor: 'grey'}}>
         {mylocation ? (
           <MapView
@@ -57,7 +63,7 @@ function HomeScreen({navigation}) {
         ) : (
           <Text>allow location access</Text>
         )}
-      </View>
+      </View> */}
       <Pressable
         onPress={handleOpenDrawer}
         style={{
