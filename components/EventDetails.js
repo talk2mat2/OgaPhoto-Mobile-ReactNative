@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   Container: {paddingTop: 20, padding: 10, backgroundColor: '#ffffff'},
   MidText: {
     color: 'grey',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'left',
     fontWeight: '400',
   },

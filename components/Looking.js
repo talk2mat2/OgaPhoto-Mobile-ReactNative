@@ -14,7 +14,7 @@ import {
   Alert,
   Image,
   ActivityIndicator,
-  KeyboardAvoidingView,
+  // KeyboardAvoidingView,
 } from 'react-native';
 
 import Icon4 from 'react-native-vector-icons/Entypo';
@@ -24,7 +24,7 @@ import MapView, {
   PROVIDER_GOOGLE,
   Marker,
   Polyline,
-  MapViewAnimated,
+  // MapViewAnimated,
 } from 'react-native-maps';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {useDispatch, useSelector} from 'react-redux';
@@ -37,6 +37,9 @@ function Looking({navigation}) {
   const [ConfirmAgreeVisible, setConfirmAgreeVisible] = useState(false);
   const [locations, setLocations] = useState([]);
   const [CardVisible, setCardVisible] = useState(true);
+  const [successBookedCardVisible, setsuccessBookedCardVisible] = useState(
+    false,
+  );
   const [Searching, setSearching] = useState(false);
   const [PhotoDetails, setPhotoDetails] = useState(false);
   const [PhotoInfo, setPhotoInfo] = useState(null);
@@ -45,19 +48,38 @@ function Looking({navigation}) {
   const token = CurrentUser && CurrentUser.token;
   const photographers = useSelector(state => state.photographers);
   const [PriceTag, setPriceTag] = useState(null);
+
+  const userData = CurrentUser && CurrentUser.userData;
   const dispatch = useDispatch();
   const handleOpenDrawer = () => {
     navigation.toggleDrawer();
   };
   let mapRef = null;
   const CloserPhotoGrapher = photographer => {
-    const CloserPhotoGrapheritem =
-      photographer &&
-      photographer.length > 0 &&
-      photographer.reduce(function (prev, curr) {
-        return prev.distance < curr.distance ? prev : curr;
-      });
-    return CloserPhotoGrapheritem;
+    if (photographers && photographers.length > 0) {
+      const CloserPhotoGrapheritem =
+        photographer &&
+        photographer.reduce(function (prev, curr) {
+          return prev.distance < curr.distance ? prev : curr;
+        });
+      return CloserPhotoGrapheritem;
+    } else {
+      return {};
+    }
+  };
+  const Greetings = () => {
+    var d = new Date();
+    var time = d.getHours();
+
+    if (time < 12) {
+      return 'Good morning!';
+    }
+    if (time > 12 && time < 18) {
+      return 'Good afternoon!';
+    }
+    if (time > 18) {
+      return 'Good Evening';
+    }
   };
   const option = {
     enableHighAccuracy: true,
@@ -68,8 +90,8 @@ function Looking({navigation}) {
     if (mylocation == null) {
       Geolocation.getCurrentPosition(
         position => {
-          console.log(position.coords.latitude);
-          console.log(position.coords.longitude);
+          // console.log(position.coords.latitude);
+          // console.log(position.coords.longitude);
           setMylocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
@@ -100,7 +122,7 @@ function Looking({navigation}) {
       .then(res => {
         setsendingRequest(false);
         console.log(res.data);
-        Alert.alert('request sent .check Under history for progress');
+        setsuccessBookedCardVisible(true);
       })
       .catch(err => {
         setsendingRequest(false);
@@ -243,9 +265,10 @@ function Looking({navigation}) {
   //   }
   // }, [photographers, mapRef, sessionVenue]);
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{flex: 1, alignItems: 'center'}}>
       <View
         style={{
+          flex: 1,
           width: 100 + '%',
           height: 90 + '%',
           backgroundColor: '#ffffff',
@@ -256,7 +279,7 @@ function Looking({navigation}) {
               mapRef = ref;
             }}
             onLayout={() =>
-              photographers
+              photographers.length > 0 && sessionVenue.lat
                 ? mapRef.fitToCoordinates(
                     [
                       {latitude: sessionVenue.lat, longitude: sessionVenue.lng},
@@ -276,7 +299,7 @@ function Looking({navigation}) {
             provider={PROVIDER_GOOGLE}
             style={{flex: 1}}
             region={
-              mylocation.lat
+              mylocation && mylocation.lat
                 ? {
                     latitude: mylocation.lat,
                     longitude: mylocation.lng,
@@ -393,11 +416,16 @@ function Looking({navigation}) {
             }}>
             <Text style={{color: '#ffffff'}}>Confirm PhotoExpress</Text>
           </Button>
+          <View style={styles.Margin} />
+          <Text style={styles.HeadText3}>OGAPHOTO 2021</Text>
         </View>
       ) : null}
       {CardVisible ? (
         <View style={styles.SearchContainer}>
-          <Text style={styles.HeadText2}>Session Location ?</Text>
+          <Text>
+            {Greetings()}, {userData.fname}
+          </Text>
+          <Text style={styles.HeadText2}>Select Session Location ?</Text>
 
           <GooglePlacesAutocomplete
             placeholder="Search"
@@ -417,6 +445,17 @@ function Looking({navigation}) {
           />
         </View>
       ) : null}
+      {successBookedCardVisible ? (
+        <View style={styles.SuccessbookedContainer}>
+          <Icon5 color="#32CD32" size={40} name="smileo" />
+          <Text>request sent .check Under history for progress'</Text>
+          <Button
+            onPress={() => setsuccessBookedCardVisible(false)}
+            style={styles.Mybutton2}>
+            ok
+          </Button>
+        </View>
+      ) : null}
       <Modal
         visible={PhotoDetails}
         animationType="slide"
@@ -426,16 +465,16 @@ function Looking({navigation}) {
             <Text style={{...styles.HeadText2}}>
               PhotoGrapher/videographer details
             </Text>
-            <View style={styles.Margin} />
+            <View style={{marginVertical: 6}} />
             <Text style={styles.MidText}>name:{PhotoInfo.fname}</Text>
             <Text style={styles.MidText}>phone:{PhotoInfo.mobile}</Text>
             <Text style={styles.MidText}>
-              distance : around
+              distance : around{' '}
               {PhotoInfo.mobile && (PhotoInfo.distance / 1000).toFixed(1)} km
             </Text>
             <Text style={styles.MidText}>email:{PhotoInfo.Email}</Text>
             <Text style={styles.MidText}>address:</Text>
-            <Text style={styles.MidText}>location:</Text>
+            {/* <Text style={styles.MidText}>location:</Text> */}
             <View style={styles.Margin} />
             <Button
               style={styles.Mybutton2}
@@ -467,7 +506,7 @@ function Looking({navigation}) {
           zIndex: 3,
           elevation: 3,
           left: 10,
-          top: 20,
+          top: 5,
           position: 'absolute',
         }}>
         <Icon4
@@ -549,12 +588,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   SearchContainer: {
-    minHeight: 200,
+    minHeight: 150,
     width: 270,
     position: 'absolute',
     zIndex: 2,
     elevation: 2,
     top: 20,
+    backgroundColor: '#ffff',
+    padding: 10,
+    borderRadius: 2,
+    shadowColor: 'rgba(0, 0, 0, 0.75)',
+    shadowOffset: {width: -11, height: 2},
+    shadowRadius: 10,
+  },
+  SuccessbookedContainer: {
+    minHeight: 150,
+    width: 270,
+    position: 'absolute',
+    zIndex: 3,
+    textAlign: 'center',
+    alignItems: 'center',
+    elevation: 3,
+    top: 40 + '%',
     backgroundColor: '#ffff',
     padding: 10,
     borderRadius: 2,
@@ -568,9 +623,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
   },
+  HeadText3: {
+    color: 'black',
+    fontSize: 14,
+    textAlign: 'center',
+    fontWeight: '300',
+  },
   MidText: {
-    color: 'grey',
-    fontSize: 18,
+    color: 'black',
+    fontSize: 14,
     textAlign: 'left',
     fontWeight: '400',
   },

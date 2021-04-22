@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-paper';
 import {Button} from 'react-native-paper';
 import {useDispatch} from 'react-redux';
+import Geolocation from '@react-native-community/geolocation';
 import {LOGINSUCCESS} from '../redux/action';
 import Icon from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
@@ -39,24 +40,40 @@ const PhotographerModal = props => {
     maximumAge: 0,
   };
   useEffect(() => {
-    if ('geolocation' in navigator) {
-      if (mylocation === null) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            setMylocation({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
-            // alert(position.coords.latitude)
-          },
-          err => console.log(err),
-          option,
-        );
-      }
-    } else {
-      console.log('location Not Available');
+    if (mylocation == null) {
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log(position.coords.latitude);
+          console.log(position.coords.longitude);
+          setMylocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        err => console.log(err),
+        option,
+      );
     }
   }, []);
+  // useEffect(() => {
+  //   if ('geolocation' in navigator) {
+  //     if (mylocation === null) {
+  //       navigator.geolocation.getCurrentPosition(
+  //         position => {
+  //           setMylocation({
+  //             lat: position.coords.latitude,
+  //             lng: position.coords.longitude,
+  //           });
+  //           // alert(position.coords.latitude)
+  //         },
+  //         err => console.log(err),
+  //         option,
+  //       );
+  //     }
+  //   } else {
+  //     console.log('location Not Available');
+  //   }
+  // }, []);
 
   // process.env.REACT_APP_API_URL
   const handleSignup = values => {

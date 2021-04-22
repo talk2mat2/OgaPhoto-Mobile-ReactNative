@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
-const Backgroundimg = require('../assets/back.jpg');
+const Backgroundimg = require('../assets/back3.jpg');
 import {TextInput} from 'react-native-paper';
 import {Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';

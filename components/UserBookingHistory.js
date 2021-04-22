@@ -17,21 +17,21 @@ import axios from 'axios';
 import Icon5 from 'react-native-vector-icons/AntDesign';
 import {GETMYBOOKINGSUCCESS} from '../redux/action';
 import Detailevents from './UserEventDetails';
+import {useIsFocused} from '@react-navigation/native';
 
 const BookingCards = props => {
   const {item, token, HandleAcceptOffer} = props;
+
   const [EventDetailsVisible, setEventDetailsVisible] = useState(false);
   return (
-    <View
-    // style={{ cursor: 'pointer' }}
-    >
-      <Text>Booked by: {item.bookedById.fname}</Text>
+    <View style={{marginVertical: 2, backgroundColor: '#ffffff'}}>
+      <Text>request status: {!item.accepted ? 'pending' : 'accepted'}</Text>
+
+      <Text>Address : {item.address}</Text>
+
+      <Text>Mobile : {item.photographerId.mobile}</Text>
 
       <Text>Date : {item.bookingDate.substring(0, 10)}</Text>
-
-      <Text>Email : {item.bookedById.Email}</Text>
-
-      <Text>Mobile : {item.bookedById.mobile}</Text>
 
       <View
         style={{
@@ -81,7 +81,9 @@ function UserBookingHistoryHistory({navigation}) {
   const CurrentUser = useSelector(state => state.user.currentUser);
   const userData = CurrentUser && CurrentUser.userData;
   const token = CurrentUser && CurrentUser.token;
+  const isFocused = useIsFocused();
   const FecthMyBookings = async () => {
+    console.log('called');
     await axios
       .get(
         `${REACT_APP_API_URL}/users/getSesssionHistory`,
@@ -136,7 +138,7 @@ function UserBookingHistoryHistory({navigation}) {
 
   useEffect(() => {
     FecthMyBookings();
-  }, []);
+  }, [isFocused]);
 
   const MapBookings = () => {
     return (
@@ -157,7 +159,7 @@ function UserBookingHistoryHistory({navigation}) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <View style={styles.Container}>
-        <Text style={styles.HeadText2}>Session History</Text>
+        <Text style={styles.HeadText2}>My Booking History</Text>
         <View
           style={{
             width: 100 + '%',
@@ -167,7 +169,25 @@ function UserBookingHistoryHistory({navigation}) {
             marginTop: 4,
           }}
         />
-        <ScrollView>{MapBookings()}</ScrollView>
+        <ScrollView style={{backgroundColor: '#f1f0f0'}}>
+          {bookings.length > 0 ? (
+            MapBookings()
+          ) : (
+            <Text style={{textAlign: 'center', marginTop: 100}}>
+              {' '}
+              <Icon5
+                name="warning"
+                size={25}
+                style={{
+                  color: 'dodgerblue',
+                  paddingRight: 20,
+                }}
+              />
+              {'  '}
+              Empty,
+            </Text>
+          )}
+        </ScrollView>
       </View>
 
       <Icon4
@@ -179,7 +199,7 @@ function UserBookingHistoryHistory({navigation}) {
           color: 'tomato',
           zIndex: 0.5,
           left: 10,
-          top: 20,
+          top: 5,
         }}
       />
     </View>
@@ -195,14 +215,14 @@ const styles = StyleSheet.create({
   },
   Container: {
     flex: 1,
-    marginTop: 20,
+
     backgroundColor: '#ffffff',
     width: 100 + '%',
     padding: 10,
   },
   MidText: {
     color: 'grey',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'left',
     fontWeight: '400',
   },

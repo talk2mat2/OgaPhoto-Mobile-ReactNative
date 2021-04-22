@@ -93,7 +93,16 @@ const Detailevents = ({data}) => {
       {BookingDetail.bookedById && (
         <View>
           <Text style={styles.HeadText2}>Event Details</Text>
-          <View style={styles.Margin} />
+          <View
+            style={{
+              width: 100 + '%',
+              height: 1,
+              backgroundColor: 'dodgerblue',
+              marginBottom: 10,
+              marginTop: 4,
+            }}
+          />
+
           <View>
             {BookingDetail.address ? (
               <Text style={styles.MidText}>{BookingDetail.address}</Text>
@@ -107,7 +116,7 @@ const Detailevents = ({data}) => {
                 : 'pending'}
             </Text>
             <Text style={styles.MidText}>
-              Shots by :{' '}
+              photographer name:{' '}
               {BookingDetail.photographerId &&
                 BookingDetail.photographerId.fname}
             </Text>
@@ -161,10 +170,10 @@ const styles = StyleSheet.create({
   },
   Container: {paddingTop: 20, padding: 10},
   MidText: {
-    color: 'grey',
-    fontSize: 18,
+    color: 'black',
+    fontSize: 14,
     textAlign: 'left',
-    fontWeight: '400',
+    fontWeight: '800',
   },
   Margin: {
     marginVertical: 20,

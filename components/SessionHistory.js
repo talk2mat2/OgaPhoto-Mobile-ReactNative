@@ -13,6 +13,7 @@ import Icon4 from 'react-native-vector-icons/Entypo';
 import {useSelector, useDispatch} from 'react-redux';
 import {Button} from 'react-native-paper';
 import {REACT_APP_API_URL} from '../EnvKeys';
+import {useIsFocused} from '@react-navigation/native';
 import axios from 'axios';
 import Icon5 from 'react-native-vector-icons/AntDesign';
 import {GETMYBOOKINGSUCCESS} from '../redux/action';
@@ -82,7 +83,7 @@ const BookingCards = props => {
 
 function SessionHistory({navigation}) {
   const bookings = useSelector(state => state.bookings);
-
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const handleOpenDrawer = () => {
     navigation.toggleDrawer();
@@ -145,7 +146,7 @@ function SessionHistory({navigation}) {
 
   useEffect(() => {
     FecthMyBookings();
-  }, []);
+  }, [isFocused]);
 
   const MapBookings = () => {
     return (

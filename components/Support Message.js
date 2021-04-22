@@ -9,6 +9,7 @@ import {REACT_APP_API_URL} from '../EnvKeys';
 import axios from 'axios';
 import Icon5 from 'react-native-vector-icons/AntDesign';
 import DetailMessages from './DetailMessage';
+import {useIsFocused} from '@react-navigation/native';
 
 const MessageCard = ({item}) => {
   const [EventDetailsVisible, setEventDetailsVisible] = useState(false);
@@ -58,6 +59,7 @@ const MessageCard = ({item}) => {
 };
 
 function SupportMessage({navigation}) {
+  const isFocused = useIsFocused();
   const handleOpenDrawer = () => {
     navigation.toggleDrawer();
   };
@@ -100,7 +102,7 @@ function SupportMessage({navigation}) {
   };
   React.useEffect(() => {
     FetchMessages();
-  }, []);
+  }, [isFocused]);
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -145,7 +147,7 @@ function SupportMessage({navigation}) {
           color: 'tomato',
           zIndex: 0.5,
           left: 10,
-          top: 20,
+          top: 5,
         }}
       />
     </View>
@@ -161,14 +163,14 @@ const styles = StyleSheet.create({
   },
   Container: {
     flex: 1,
-    marginTop: 20,
+
     backgroundColor: '#ffffff',
     width: 100 + '%',
     padding: 10,
   },
   MidText: {
     color: 'grey',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'left',
     fontWeight: '400',
   },

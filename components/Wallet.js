@@ -31,7 +31,7 @@ function Wallet({navigation}) {
         <Text style={styles.MidText}>
           <Icon5
             name="wallet"
-            size={30}
+            size={20}
             style={{
               color: 'dodgerblue',
             }}
@@ -41,7 +41,7 @@ function Wallet({navigation}) {
         <View style={styles.Margin} />
 
         <Button style={styles.Mybutton2}>
-          <Text style={{color: '#ffffff'}}>Update Wallet</Text>
+          <Text style={{color: '#ffffff', fontSize: 12}}>Update Wallet</Text>
         </Button>
       </View>
 
@@ -54,7 +54,7 @@ function Wallet({navigation}) {
           color: 'tomato',
           zIndex: 0.5,
           left: 10,
-          top: 20,
+          top: 5,
         }}
       />
     </View>
@@ -70,14 +70,14 @@ const styles = StyleSheet.create({
   },
   Container: {
     flex: 1,
-    marginTop: 20,
+
     backgroundColor: '#ffffff',
     width: 100 + '%',
     padding: 10,
   },
   MidText: {
     color: 'grey',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'left',
     fontWeight: '400',
   },

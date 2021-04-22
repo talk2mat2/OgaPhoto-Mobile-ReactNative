@@ -100,6 +100,7 @@ const Client = props => {
         style={styles.Input}
         label="Password"
         underlineColor="rgb(0, 162, 149)"
+        autoCapitalize={'none'}
         secureTextEntry={true}
         value={password}
         onChangeText={text => {
@@ -242,7 +243,7 @@ const styles = StyleSheet.create({
   },
   MidText: {
     color: 'grey',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'center',
     fontWeight: '400',
   },

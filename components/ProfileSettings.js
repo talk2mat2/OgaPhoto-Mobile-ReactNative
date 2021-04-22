@@ -82,7 +82,7 @@ function ProfileSettings({navigation}) {
           color: 'tomato',
           zIndex: 0.5,
           left: 10,
-          top: 20,
+          top: 5,
         }}
       />
     </View>
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   Container: {
     flex: 1,
-    marginTop: 20,
+
     backgroundColor: '#ffffff',
     width: 100 + '%',
     padding: 10,

@@ -13,7 +13,7 @@ function Promos({navigation}) {
   const CurrentUser = useSelector(state => state.user.currentUser);
   const userData = CurrentUser && CurrentUser.userData;
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{flex: 1, alignItems: 'center'}}>
       <View style={styles.Container}>
         <Text style={styles.HeadText2}>Promos</Text>
         <View
@@ -40,7 +40,7 @@ function Promos({navigation}) {
           color: 'tomato',
           zIndex: 0.5,
           left: 10,
-          top: 20,
+          top: 5,
         }}
       />
     </View>
@@ -56,14 +56,14 @@ const styles = StyleSheet.create({
   },
   Container: {
     flex: 1,
-    marginTop: 20,
+
     backgroundColor: '#ffffff',
     width: 100 + '%',
     padding: 10,
   },
   MidText: {
     color: 'grey',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'center',
     fontWeight: 'bold',
   },

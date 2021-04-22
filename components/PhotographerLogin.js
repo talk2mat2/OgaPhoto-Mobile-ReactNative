@@ -101,6 +101,7 @@ const Photograpger = props => {
         label="Password"
         underlineColor="rgb(0, 162, 149)"
         secureTextEntry={true}
+        autoCapitalize={'none'}
         value={password}
         onChangeText={text => {
           setpassword(text);

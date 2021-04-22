@@ -96,7 +96,7 @@ export default function DashBoard({navigation}) {
     mylocation && userData.isPhotographer
       ? updateMyLocation({lat: mylocation.lat, lng: mylocation.lng})
       : updateClient();
-  }, []);
+  }, [mylocation]);
 
   return (
     <NavigationContainer independent={true}>
@@ -107,7 +107,11 @@ export default function DashBoard({navigation}) {
           options={{
             title: 'Home',
             drawerIcon: ({focused, size}) => (
-              <Icon name="home" size={size} color={focused ? '#7cc' : '#ccc'} />
+              <Icon
+                name="home"
+                size={size}
+                color={focused ? '#7cc' : 'tomato'}
+              />
             ),
           }}
         />
@@ -121,7 +125,7 @@ export default function DashBoard({navigation}) {
                 <Icon5
                   name="account-search"
                   size={size}
-                  color={focused ? '#7cc' : '#ccc'}
+                  color={focused ? '#7cc' : 'tomato'}
                 />
               ),
             }}
@@ -137,7 +141,7 @@ export default function DashBoard({navigation}) {
                 <Icon
                   name="camerao"
                   size={size}
-                  color={focused ? '#7cc' : '#ccc'}
+                  color={focused ? '#7cc' : 'tomato'}
                 />
               ),
             }}
@@ -154,7 +158,7 @@ export default function DashBoard({navigation}) {
                 <Icon
                   name="camerao"
                   size={size}
-                  color={focused ? '#7cc' : '#ccc'}
+                  color={focused ? '#7cc' : 'tomato'}
                 />
               ),
             }}
@@ -169,7 +173,7 @@ export default function DashBoard({navigation}) {
               <Icon
                 name="camerao"
                 size={size}
-                color={focused ? '#7cc' : '#ccc'}
+                color={focused ? '#7cc' : 'tomato'}
               />
             ),
           }}
@@ -180,7 +184,11 @@ export default function DashBoard({navigation}) {
           options={{
             title: 'Promos',
             drawerIcon: ({focused, size}) => (
-              <Icon name="tag" size={size} color={focused ? '#7cc' : '#ccc'} />
+              <Icon
+                name="tag"
+                size={size}
+                color={focused ? '#7cc' : 'tomato'}
+              />
             ),
           }}
         />
@@ -193,7 +201,7 @@ export default function DashBoard({navigation}) {
               <Icon3
                 name="support-agent"
                 size={size}
-                color={focused ? '#7cc' : '#ccc'}
+                color={focused ? '#7cc' : 'tomato'}
               />
             ),
           }}
@@ -207,7 +215,7 @@ export default function DashBoard({navigation}) {
               <Icon2
                 name="settings"
                 size={size}
-                color={focused ? '#7cc' : '#ccc'}
+                color={focused ? '#7cc' : 'tomato'}
               />
             ),
           }}
@@ -220,7 +228,7 @@ export default function DashBoard({navigation}) {
               <Icon
                 name="logout"
                 size={size}
-                color={focused ? '#7cc' : '#ccc'}
+                color={focused ? '#7cc' : 'tomato'}
               />
             ),
           }}

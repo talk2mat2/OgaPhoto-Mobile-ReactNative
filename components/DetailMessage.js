@@ -14,7 +14,9 @@ const DetailMessages = ({data}) => {
     <View style={styles.Container}>
       {message ? (
         <>
-          <Text style={styles.HeadText2}>{message.title}</Text>
+          <View style={styles.Mainbar}>
+            <Text style={styles.HeadText2}>{message.title}</Text>
+          </View>
           <View
             style={{
               width: 100 + '%',
@@ -24,11 +26,15 @@ const DetailMessages = ({data}) => {
               marginTop: 1,
             }}
           />
-          <Text style={styles.MidText}>
-            From - {message.sender.fname && message.sender.fname}
-          </Text>
+          <View style={styles.Mainbar}>
+            <Text style={styles.MidText}>
+              From - {message.sender.fname && message.sender.fname}
+            </Text>
+          </View>
           <View style={styles.Margin} />
-          <Text style={styles.MidText}>{message.body}</Text>
+          <View style={styles.MainBody}>
+            <Text style={styles.MidText}>{message.body}</Text>
+          </View>
         </>
       ) : null}
     </View>
@@ -43,21 +49,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 2,
   },
+  Mainbar: {width: 100 + '%', backgroundColor: '#ffffff', padding: 10},
   Container: {
     flex: 1,
-    marginTop: 20,
-    backgroundColor: '#ffffff',
+
+    backgroundColor: '#f1f0f0',
     width: 100 + '%',
     padding: 10,
   },
   MidText: {
     color: 'grey',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'left',
     fontWeight: '400',
   },
   Margin: {
-    marginVertical: 10,
+    marginVertical: 3,
   },
   Mybutton2: {
     backgroundColor: 'rgb(71, 178, 228)',
@@ -66,6 +73,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 2,
     color: '#ffffff',
+  },
+  MainBody: {
+    minHeight: 200,
+    flex: 1,
+    width: 100 + '%',
+    backgroundColor: '#ffffff',
+    padding: 10,
   },
   Midtext2UnderLine: {
     color: 'grey',

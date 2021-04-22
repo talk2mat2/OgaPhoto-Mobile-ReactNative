@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
   },
   MidText: {
     color: 'grey',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'center',
     fontWeight: '400',
   },
